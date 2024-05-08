@@ -13,6 +13,7 @@
  * they apply.
  */
 #include "glue.h"
+#include <string.h>
 
 typedef void (*write_proc_t)(char *buf, int nbytes);
 typedef int  (*read_proc_t)(char *buf, int nbytes);
