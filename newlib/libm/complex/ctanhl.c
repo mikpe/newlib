@@ -32,6 +32,22 @@
 #include <complex.h>
 #include <math.h>
 
+#undef HAVE_sincosl
+#undef HAVE_sincoshl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_sincosl
+#endif
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_sincoshl
+#endif
+#endif
+#endif
+
+#if defined HAVE_sincosl && defined HAVE_sincoshl
 long double complex
 ctanhl(long double complex z)
 {
@@ -45,3 +61,4 @@ ctanhl(long double complex z)
 
 	return w;
 }
+#endif
