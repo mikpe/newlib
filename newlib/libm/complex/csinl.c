@@ -33,6 +33,16 @@
 #include <math.h>
 #include "cephes_subrl.h"
 
+#undef HAVE_sincosl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_sincosl
+#endif
+#endif
+
+#if defined HAVE_sincosl
 long double complex
 csinl(long double complex z)
 {
@@ -43,3 +53,4 @@ csinl(long double complex z)
 	w = sinl(creall(z)) * ch + (cosl(creall(z)) * sh) * I;
 	return w;
 }
+#endif
