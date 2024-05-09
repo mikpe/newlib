@@ -32,6 +32,22 @@
 #include <complex.h>
 #include <math.h>
 
+#undef HAVE_sincosl
+#undef HAVE_expl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_sincosl
+#endif
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_expl
+#endif
+#endif
+#endif
+
+#if defined HAVE_sincosl && defined HAVE_expl
 long double complex
 cexpl(long double complex z)
 {
@@ -44,3 +60,4 @@ cexpl(long double complex z)
 	w = r * cosl(y) + r * sinl(y) * I;
 	return w;
 }
+#endif
