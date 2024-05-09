@@ -99,6 +99,7 @@
 extern void putDebugChar ();	/* write a single character      */
 extern int getDebugChar ();	/* read and return a single char */
 extern void exceptionHandler ();	/* assign an exception handler   */
+extern unsigned long getExceptionHandler (int);
 
 /*****************************************************************************
  * BUFMAX defines the maximum number of characters in inbound/outbound buffers
@@ -198,6 +199,10 @@ static unsigned long crc32 (unsigned char *, int, unsigned long);
 static void gdb_error (char *, char *);
 static int gdb_putchar (int), gdb_puts (char *), gdb_write (char *, int);
 
+#undef strcpy
+#define strcpy private_strcpy
+#undef strlen
+#define strlen private_strlen
 static unsigned char *strcpy (unsigned char *, const unsigned char *);
 static int strlen (const unsigned char *);
 
