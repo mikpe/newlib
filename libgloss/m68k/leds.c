@@ -14,6 +14,7 @@
  * they apply.
  */
 #include "leds.h"
+extern void delay (int);
 
 extern void delay(int);
 
