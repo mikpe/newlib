@@ -34,6 +34,22 @@
 #include <math.h>
 #include "cephes_subrl.h"
 
+#undef HAVE_sincosl_fabsl
+#undef HAVE_sincoshl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_sincosl_fabsl
+#endif
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_sincoshl
+#endif
+#endif
+#endif
+
+#if defined HAVE_sincosl_fabsl && defined HAVE_sincoshl
 long double complex
 ctanl(long double complex z)
 {
@@ -54,3 +70,4 @@ ctanl(long double complex z)
 	w = sinl(2.0L * creall(z)) / d + (sinhl(2.0L * cimagl(z)) / d) * I;
 	return w;
 }
+#endif
