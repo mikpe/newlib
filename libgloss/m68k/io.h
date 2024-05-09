@@ -37,7 +37,7 @@
 
 /* This function is provided by the board's BSP, because the precise
    mechanism of informing gdb is board specific.  */
-extern int __io_hosted (int func, void *args);
+extern int __hosted (int func, void *args);
 
 /* Protocol specific representation of datatypes, as specified in D.9.11
  * of the GDB manual.
