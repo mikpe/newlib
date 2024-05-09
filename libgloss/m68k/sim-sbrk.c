@@ -14,6 +14,8 @@
  * they apply.
  */
 
+extern int brk (void *);
+
 extern char _end[];
 static char *curbrk = _end;
 
