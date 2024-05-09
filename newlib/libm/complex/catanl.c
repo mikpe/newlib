@@ -37,6 +37,18 @@
 __weak_alias(catanl, _catanl)
 #endif
 
+#undef HAVE_atan2l_logl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_atan2l_logl
+#endif
+#endif
+#endif
+
+#if defined HAVE_atan2l_logl
 long double complex
 catanl(long double complex z)
 {
@@ -72,4 +84,5 @@ ovrf:
 	w = HUGE_VALL + HUGE_VALL * I;
 	return w;
 }
+#endif
 
