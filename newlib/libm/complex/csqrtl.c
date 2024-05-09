@@ -49,6 +49,18 @@ __RCSID("$NetBSD: csqrtl.c,v 1.2 2014/10/11 00:43:51 christos Exp $");
 
 #define cpackl(r, i) ((r) + (i) * I)
 
+#undef HAVE_fabsl
+#undef HAVE_copysignl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_fabsl
+#endif
+#define HAVE_copysignl
+#endif
+
+#if defined HAVE_fabsl && defined HAVE_copysignl
 long double complex
 csqrtl(long double complex z)
 {
@@ -110,3 +122,4 @@ csqrtl(long double complex z)
 	else
 		return (result);
 }
+#endif
