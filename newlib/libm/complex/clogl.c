@@ -32,6 +32,18 @@
 #include <complex.h>
 #include <math.h>
 
+#undef HAVE_atan2l_and_logl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_atan2l_and_logl
+#endif
+#endif
+#endif
+
+#if defined HAVE_atan2l_and_logl
 long double complex
 clogl(long double complex z)
 {
@@ -44,3 +56,4 @@ clogl(long double complex z)
 	w = p + rr * I;
 	return w;
 }
+#endif
