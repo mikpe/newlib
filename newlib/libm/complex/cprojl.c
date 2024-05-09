@@ -33,6 +33,14 @@ __RCSID("$NetBSD: cprojl.c,v 1.7 2014/10/10 00:48:18 christos Exp $");
 
 #include "../common/fdlibm.h"
 
+#undef HAVE_copysignl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#define HAVE_copysignl
+#endif
+
+#ifdef HAVE_copysignl
 /*
  * cprojl(long double complex z)
  *
@@ -62,3 +70,4 @@ cprojl(long double complex z)
 
 	return (w.z);
 }
+#endif
