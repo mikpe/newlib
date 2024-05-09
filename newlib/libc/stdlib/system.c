@@ -61,6 +61,7 @@ _system_r (struct _reent *ptr,
      const char *s)
 {
 #if defined(HAVE_SYSTEM)
+  extern int _system (const char *);
   return _system (s);
   ptr = ptr;
 #elif defined(NO_EXEC)
