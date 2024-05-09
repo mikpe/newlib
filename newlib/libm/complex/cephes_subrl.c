@@ -35,6 +35,24 @@
 
 /* calculate cosh and sinh */
 
+#undef HAVE_fabsl
+#undef HAVE_sincoshl_and_expl
+#undef HAVE_copysignl
+#if defined (_LDBL_EQ_DBL) || defined (__CYGWIN__) ||			\
+	defined(__aarch64__) || defined(__i386__) || defined(__x86_64__) || \
+	defined(__riscv)
+#ifndef __math_68881
+#define HAVE_fabsl
+#endif
+#ifndef _REENT_ONLY
+#ifndef __math_68881
+#define HAVE_sincoshl_and_expl
+#endif
+#endif
+#define HAVE_copysignl
+#endif
+
+#if defined HAVE_fabsl && defined HAVE_sincoshl_and_expl && defined HAVE_copysignl
 void
 _cchshl(long double x, long double *c, long double *s)
 {
@@ -51,6 +69,7 @@ _cchshl(long double x, long double *c, long double *s)
 		*c = e + ei;
 	}
 }
+#endif
 
 /* Program to subtract nearest integer multiple of PI */
 
@@ -85,6 +104,7 @@ _redupil(long double x)
 
 /* Taylor series expansion for cosh(2y) - cos(2x) */
 
+#ifdef HAVE_fabsl
 long double
 _ctansl(long double complex z)
 {
@@ -126,3 +146,4 @@ _ctansl(long double complex z)
 	} while (fabsl(t/d) > MACHEPL);
 	return d;
 }
+#endif
