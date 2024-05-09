@@ -14,6 +14,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
 extern const int __interrupt_vector[];
 extern void __reset (void);
