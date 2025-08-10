@@ -96,9 +96,9 @@
  *
  * external low-level support routines
  */
-extern void putDebugChar ();	/* write a single character      */
+extern void putDebugChar (int);	/* write a single character      */
 extern int getDebugChar ();	/* read and return a single char */
-extern void exceptionHandler ();	/* assign an exception handler   */
+extern void exceptionHandler (int, void (*)(void));	/* assign an exception handler   */
 extern unsigned long getExceptionHandler (int);
 
 /*****************************************************************************
