@@ -7,5 +7,5 @@
 time_t
 time (time_t *tloc)
 {
-  return TRAP0 (SYS_time, tloc, 0, 0);
+  return TRAP0 (SYS_time, (unsigned long) tloc, 0, 0);
 }
