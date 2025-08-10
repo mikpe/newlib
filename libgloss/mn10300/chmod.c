@@ -7,5 +7,5 @@
 int
 chmod (const char *path, mode_t mode)
 {
-  return TRAP0 (SYS_chmod, path, mode, 0);
+  return TRAP0 (SYS_chmod, (unsigned long) path, mode, 0);
 }
