@@ -118,10 +118,11 @@ void phex(long x)
 
 #define TRAP_VECTOR_BASE_ADDR   0x00000040
 
-/* Setup trap TT to go to ROUTINE. */
+/* Setup trap TT to go to HANDLER. */
 void 
-exceptionHandler (int tt, unsigned long routine)
+exceptionHandler (int tt, void (*handler)(void))
 {
+  unsigned long routine = (unsigned long) handler;
 #ifndef REVC
   unsigned long *tb = (unsigned long *) TRAP_VECTOR_BASE_ADDR;
   tb[tt] = (0xff000000 | ((routine - (unsigned long) (&tb[tt])) >> 2));
