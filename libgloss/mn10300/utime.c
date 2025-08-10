@@ -9,5 +9,5 @@ utime (path, times)
      const char *path;
      char *times;
 {
-  return TRAP0 (SYS_utime, path, times, 0);
+  return TRAP0 (SYS_utime, (unsigned long) path, (unsigned long) times, 0);
 }

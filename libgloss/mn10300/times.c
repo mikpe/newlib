@@ -8,5 +8,5 @@
 clock_t
 _times (struct tms *buffer)
 {
-  return TRAP0 (SYS_times, buffer, 0, 0);
+  return TRAP0 (SYS_times, (unsigned long) buffer, 0, 0);
 }

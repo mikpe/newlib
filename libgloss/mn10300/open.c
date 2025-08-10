@@ -8,5 +8,5 @@ int
 _open (const char *path,
 	int flags)
 {
-  return TRAP0 (SYS_open, path, flags, 0);
+  return TRAP0 (SYS_open, (unsigned long) path, flags, 0);
 }

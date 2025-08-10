@@ -9,5 +9,5 @@ _write ( int file,
 	 char *ptr,
 	 size_t len)
 {
-  return TRAP0 (SYS_write, file, ptr, len);
+  return TRAP0 (SYS_write, file, (unsigned long) ptr, len);
 }
