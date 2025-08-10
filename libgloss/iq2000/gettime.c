@@ -8,5 +8,5 @@
 int
 _gettimeofday (struct timeval *tp, void *tzp)
 {
-  return TRAP0 (SYS_gettimeofday, tp, tzp, 0);
+  return TRAP0 (SYS_gettimeofday, (unsigned long) tp, (unsigned long) tzp, 0);
 }

@@ -9,5 +9,5 @@ _read (int file,
        char *ptr,
        size_t len)
 {
-  return TRAP0 (SYS_read, file, ptr, len);
+  return TRAP0 (SYS_read, file, (unsigned long) ptr, len);
 }
