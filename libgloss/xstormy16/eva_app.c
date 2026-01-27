@@ -15,7 +15,7 @@
 #include "glue.h"
 #include <string.h>
 
-typedef void (*write_proc_t)(char *buf, int nbytes);
+typedef void (*write_proc_t)(const char *buf, int nbytes);
 typedef int  (*read_proc_t)(char *buf, int nbytes);
 
 /* There is no "syscall", so we just call directly into the stub code
@@ -27,7 +27,7 @@ typedef int  (*read_proc_t)(char *buf, int nbytes);
  * print -- do a raw print of a string
  */ 
 void
-print(char *ptr)
+print(const char *ptr)
 {
   STUB_WRITE(ptr, strlen(ptr));
 }
