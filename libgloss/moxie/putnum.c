@@ -14,7 +14,7 @@
  */
 #include "glue.h"
 
-void print (char *);
+void print (const char *);
 
 /*
  * putnum -- print a 32 bit number in hex
